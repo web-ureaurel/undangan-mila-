@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan Spesial</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body, html {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background-color: #fcf8f2;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), 
+                        url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1000') no-repeat center center/cover;
+        }
+
+        .title {
+            font-size: 1.1rem;
+            color: #8a7355;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .pasangan {
+            font-size: 2.3rem;
+            color: #4a3b32;
+            font-weight: bold;
+            margin: 15px 0;
+            line-height: 1.3;
+        }
+
+        .info-acara {
+            margin-bottom: 25px; 
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .penerima-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            border: 1px solid #e6dfd5;
+        }
+
+        .penerima-box p {
+            font-size: 0.85rem;
+            color: #777;
+        }
+
+        .nama-penerima {
+            font-size: 1.5rem;
+            color: #c99a5c;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .btn-buka {
+            background-color: #c99a5c;
+            color: white;
+            border: none;
+            padding: 12px 40px;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(201, 154, 92, 0.4);
+            transition: all 0.2s ease;
+        }
+
+        .btn-buka:hover {
+            background-color: #b0844b;
+            transform: scale(1.05);
+        }
+
+        .prank-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            padding: 20px;
+        }
+
+        .prank-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            transform: scale(0.7);
+            transition: transform 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .prank-overlay.aktif {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .prank-overlay.aktif .prank-card {
+            transform: scale(1);
+        }
+
+        .prank-card h1 {
+            font-size: 3rem;
+            color: #e74c3c;
+            margin-bottom: 15px;
+            animation: bounce 0.5s infinite alternate;
+        }
+
+        .prank-card p {
+            font-size: 1.1rem;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .btn-close {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="title">The Wedding Of</div>
+        
+        <div class="pasangan">
+            Zhengxing Kayros<br>&<br>Zeah Anastasya
+        </div>
+
+        <div class="info-acara">
+            <p><strong>Tanggal:</strong> 18 Agustus 2026</p>
+            <p><strong>Tempat:</strong> Palu Grand Mall</p>
+        </div>
+
+        <div class="penerima-box">
+            <p>Kepada Yth. Kawan Spesial:</p>
+            <div class="nama-penerima">Mila</div>
+        </div>
+
+        <button class="btn-buka" onclick="bukaPrank()">Buka Undangan</button>
+    </div>
+
+    <div class="prank-overlay" id="layerPrank">
+        <div class="prank-card">
+            <h1>🤪 PRANK! 🤪</h1>
+            <p>Ciyeee... ada yang panik ya pas baca? HAHAHA!<br><br>Tenang sayang, ini cuma bercanda kok. Don't worry, i love you! ❤️</p>
+            <button class="btn-close" onclick="tutupPrank()">Selesai Marah-Marah</button>
+        </div>
+    </div>
+
+    <script>
+        function bukaPrank() {
+            document.getElementById('layerPrank').classList.add('aktif');
+        }
+
+        function tutupPrank() {
+            document.getElementById('layerPrank').classList.remove('aktif');
+            alert('Jangan ngambek ya Mila! 😋');
+        }
+    </script>
+
+</body>
+</html>
